@@ -19,16 +19,17 @@ $f3->set('DEBUG', 3);
 
 //Define arrays
 $f3->set('meals', array('breakfast', 'lunch', 'dinner'));
+$f3->set('apply', array('This is an easy midterm','I like Midterms','Today is Monday'));
 
 //Define a default route
 $f3->route('GET /', function() {
 
     echo "<h1>Midterm Survey</h1>";
-    echo "<a href='order'>Take My Midterm Survey</a>";
+    echo "<a href='survey'>Take My Midterm Survey</a>";
 });
 
 //Define an order route
-$f3->route('GET|POST /order', function($f3) {
+$f3->route('GET|POST /survey', function($f3) {
 
     //If form has been submitted, validate
     if(!empty($_POST)) {
@@ -58,7 +59,7 @@ $f3->route('GET|POST /order', function($f3) {
 
     //Display order form
     $view = new Template();
-    echo $view->render('views/order-form.html');
+    echo $view->render('views/midterm-form.html');
 });
 
 //Define a summary route

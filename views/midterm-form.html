@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Order</title>
+    <style>
+        .err {
+            color: darkred;
+        }
+    </style>
+</head>
+<body>
+<h1>Midterm Survey</h1>
+<form method="post" action="#">
+    <label>Name
+        <input type="text" name="food" value=""{{ @food }}>
+    </label>
+    <p>
+        <br>
+        <repeat group="{{ @apply }}" value="{{ @active }}">
+            <label>
+                <input type="checkbox" name="act[]" value="{{ @active }}"
+                <check if="{{ !empty($_POST['act']) && in_array(@active, $_POST['act']) }}">
+                    checked="checked"
+                </check>
+                >{{ @active }}
+            </label>
+            <br>
+        </repeat>
+    </p>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

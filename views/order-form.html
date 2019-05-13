@@ -11,50 +11,67 @@
     </style>
 </head>
 <body>
-<h1>Food Order</h1>
+<h1>Midterm Survey</h1>
 <form method="post" action="#">
-
-    <label>Food Item
+    <label>Name
         <input type="text" name="food" value=""{{ @food }}>
     </label>
-    <check if="{{ @errors['food'] }}">
-        <span class="err">{{ @errors['food'] }}</span>
-    </check><br><br>
+<!--    <check if="{{ @errors['food'] }}">-->
+<!--        <span class="err">{{ @errors['food'] }}</span>-->
+<!--    </check><br><br>-->
 
-    <!-- Add Quantity field here -->
-    <label>Quantity
-        <input type="text" name="quantity" value="{{ @qty }}">
-    </label>
-    <check if="{{ @errors['quantity'] }}">
-        <span class="err">{{ @errors['quantity'] }}</span>
-    </check><br><br>
-
-
+<!--    &lt;!&ndash; Add Quantity field here &ndash;&gt;-->
+<!--    <label>Quantity-->
+<!--        <input type="text" name="quantity" value="{{ @qty }}">-->
+<!--    </label>-->
+<!--    <check if="{{ @errors['quantity'] }}">-->
+<!--        <span class="err">{{ @errors['quantity'] }}</span>-->
+<!--    </check><br><br>-->
 
 
-    <p>Select Meal
-        <check if="{{ @errors['meal'] }}">
-            <span class="err">{{ @errors['meal'] }}</span>
-        </check><br>
-    <repeat group="{{ @meals }}" value="{{ @mealOption }}">
-        <label><input type="radio"
-                      name="meal"
-                      value="{{ @mealOption }}"
-                      <check if="{{ @mealOption == @meal }}">
-                          checked="checked"
-                      </check>
-        >{{ @mealOption }}
-        </label><br>
-    </repeat>
-    </p>
+
+
+<!--    <p>Select Meal-->
+<!--        <check if="{{ @errors['meal'] }}">-->
+<!--            <span class="err">{{ @errors['meal'] }}</span>-->
+<!--        </check><br>-->
+<!--    <repeat group="{{ @meals }}" value="{{ @mealOption }}">-->
+<!--        <label><input type="radio"-->
+<!--                      name="meal"-->
+<!--                      value="{{ @mealOption }}"-->
+<!--                      <check if="{{ @mealOption == @meal }}">-->
+<!--                          checked="checked"-->
+<!--                      </check>-->
+<!--        >{{ @mealOption }}-->
+<!--        </label><br>-->
+<!--    </repeat>-->
+<!--    </p>-->
 
     <!-- Add Condiments checkboxes here -->
 
-
-
-
-
-    <input type="submit" value="Place Order">
-</form>
+<!--    <form action="#" method="post" class="form-horizontal">-->
+<!--        <div class="col-sm-3">-->
+            <p>
+                Check all that apply:
+<!--                <check if="{{ @errors['act'] }}">-->
+<!--                    <span class="err">{{ @errors['act'] }}</span>-->
+<!--                </check>-->
+                <br>
+                <repeat group="{{ @apply }}" value="{{ @active }}">
+                    <label>
+                        <input type="checkbox" name="act[]" value="{{ @active }}"
+                        <check if="{{ !empty($_POST['act']) && in_array(@active, $_POST['act']) }}">
+                            checked="checked"
+                        </check>
+                        >{{ @active }}
+                    </label>
+                    <br>
+                </repeat>
+            </p>
+<!--        </div>-->
+        <input type="submit" value="Submit">
+    </form>
+<!--    <input type="submit" value="Place Order">-->
+<!--</form>-->
 </body>
 </html>
