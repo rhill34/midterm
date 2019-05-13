@@ -1,0 +1,12 @@
+{
+  "name": "rhill34/328/midterm",
+  "authors": [
+    {
+      "name": "Robert Hill",
+      "email": "rhill34@greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
