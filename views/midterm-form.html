@@ -11,12 +11,18 @@
 </head>
 <body>
 <h1>Midterm Survey</h1>
-<form method="post" action="summary">
+<form method="post" action="#">
     <label>Name
-        <input type="text" name="name" value=""{{ @food }}>
+        <input type="text" name="name" value=""{{ @name }}>
     </label>
     <p>
+        <check if="{{ @errors['name'] }}">
+            <span class="err">{{ @errors['name'] }}</span>
+        </check>
         <br>
+        <check if="{{ @errors['meal'] }}">
+            <span class="err">{{ @errors['meal'] }}</span>
+        </check>
         <repeat group="{{ @apply }}" value="{{ @active }}">
             <label>
                 <input type="checkbox" name="act[]" value="{{ @active }}"

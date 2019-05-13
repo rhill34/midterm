@@ -18,7 +18,6 @@ $f3 = Base::instance();
 $f3->set('DEBUG', 3);
 
 //Define arrays
-$f3->set('meals', array('breakfast', 'lunch', 'dinner'));
 $f3->set('apply', array('This is an easy midterm','I like Midterms','Today is Monday'));
 
 //Define a default route
@@ -29,37 +28,39 @@ $f3->route('GET /', function() {
 });
 
 //Define an order route
-$f3->route('GET|POST /survey', function()
+$f3->route('GET|POST /survey', function($f3)
 {
-    //Display order form
-    $view = new Template();
-    echo $view->render('views/midterm-form.html');
-});
 
-//Define a summary route
-$f3->route('GET|POST /summary', function($f3)
-{
-    //If form has been submitted, validate
+//If form has been submitted, validate
     if(!empty($_POST)) {
 
         //Get data from form
         $food = $_POST['name'];
         $apply = $_POST['act'];
 
-
         //Add data to hive
         $f3->set('name', $food);
         $f3->set('meal', $apply);
-
+        if (validForm()) {
             //Write data to Session
             $_SESSION['name'] = $food;
             $_SESSION['apply'] = $apply;
-            if(!empty($_POST['act'])){
-                $interest              = implode(", ", $apply);
+            if (!empty($_POST['act'])) {
+                $interest = implode(", ", $apply);
                 $_SESSION['apply'] = $interest;
             }
-
+            $f3->reroute('/summary');
+        }
     }
+
+    //Display order form
+    $view = new Template();
+    echo $view->render('views/midterm-form.html');
+});
+
+//Define a summary route
+$f3->route('GET|POST /summary', function()
+{
     //Display summary
     $view = new Template();
     echo $view->render('views/summary.html');

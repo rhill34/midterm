@@ -7,29 +7,15 @@ function validForm()
 {
     global $f3;
     $isValid = true;
-
-    if (!validFood($f3->get('food'))) {
+    if (!validFood($f3->get('name'))) {
 
         $isValid = false;
-        $f3->set("errors['food']", "Please enter a food item");
+        $f3->set("errors['name']", "Please enter a alphabetical name! (No spaces)");
     }
 
-    if (!validQty($f3->get('qty'))) {
-
+    if (!validCondiments($f3->get('meal'))) {
         $isValid = false;
-        $f3->set("errors['qty']", "Please enter 1 or more");
-    }
-
-    if (!validMeal($f3->get('meal'))) {
-
-        $isValid = false;
-        $f3->set("errors['meal']", "Please select a meal");
-    }
-
-    if (!validCondiments($f3->get('cond'))) {
-
-        $isValid = false;
-        $f3->set("errors['cond']", "Invalid selection");
+        $f3->set("errors['meal']", "Invalid selection");
     }
 
     return $isValid;
@@ -82,5 +68,5 @@ function validMeal($meal)
 function validCondiments($cond)
 {
     global $f3;
-    return true;
+    return (!empty($cond) && 0 == count(array_diff($cond, $f3->get('meal'))));
 }
