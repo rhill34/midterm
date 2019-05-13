@@ -29,42 +29,37 @@ $f3->route('GET /', function() {
 });
 
 //Define an order route
-$f3->route('GET|POST /survey', function($f3) {
-
-    //If form has been submitted, validate
-    if(!empty($_POST)) {
-
-        //Get data from form
-        $food = $_POST['food'];
-        $meal = $_POST['meal'];
-        $qty = $_POST['qty'];
-
-        //Add data to hive
-        $f3->set('food', $food);
-        $f3->set('meal', $meal);
-        $f3->set('qty',$qty);
-
-        //If data is valid
-        if (validForm()) {
-
-            //Write data to Session
-            $_SESSION['food'] = $food;
-            $_SESSION['meal'] = $meal;
-            $_SESSION['qty'] = $qty;
-
-            //Redirect to Summary
-            $f3->reroute('/summary');
-        }
-    }
-
+$f3->route('GET|POST /survey', function()
+{
     //Display order form
     $view = new Template();
     echo $view->render('views/midterm-form.html');
 });
 
 //Define a summary route
-$f3->route('GET /summary', function() {
+$f3->route('GET|POST /summary', function($f3)
+{
+    //If form has been submitted, validate
+    if(!empty($_POST)) {
 
+        //Get data from form
+        $food = $_POST['name'];
+        $apply = $_POST['act'];
+
+
+        //Add data to hive
+        $f3->set('name', $food);
+        $f3->set('meal', $apply);
+
+            //Write data to Session
+            $_SESSION['name'] = $food;
+            $_SESSION['apply'] = $apply;
+            if(!empty($_POST['act'])){
+                $interest              = implode(", ", $apply);
+                $_SESSION['apply'] = $interest;
+            }
+
+    }
     //Display summary
     $view = new Template();
     echo $view->render('views/summary.html');
